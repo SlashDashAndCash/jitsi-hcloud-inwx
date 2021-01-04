@@ -1,6 +1,10 @@
 # jitsi-hcloud-inwx
 Bootstraps a Jitsi Meet server. All you neeed is a Hetzner Cloud account and a domain hosted at INWX.
 
+## Security considerations
+This project installes a Jitsi Meet server as is. No authentication and access restrictions will be configured. \
+If you're looking for advanced security settings. Take a look at https://jitsi.github.io/handbook/docs/devops-guide/secure-domain
+
 ## Prerequisites
 - Linux or Darwin workstation to run Terraform on. \
 Windows may also work but not tested.
@@ -12,7 +16,7 @@ Windows may also work but not tested.
 ## Installation
 1. Clone this project in your home directory (or any subfolder) \
 `git clone https://github.com/SlashDashAndCash/jitsi-hcloud-inwx.git`
-2. Run ./prepare script. This should be done only once. \
+2. Run ./prepare script. This should be done only once.
 ```
 cd jitsi-hcloud-inwx
 chmod +x prepare.sh
@@ -29,23 +33,27 @@ chmod +x prepare.sh
 All uncommented variables are mandatory. Paste the newly created API-Token into hcloud_token.
 
 ## Bootstrap your server
-1. Source environment script. This must be done in every new terminal session. \
+1. Source environment script. This must be done in every new terminal session.
 `. env.sh`
-2. Run Terragrunt. This will upload your SSH pulic key and create server, Let's Encrypt certificate and DNS recdords. \
+2. Run Terragrunt. This will upload your SSH pulic key and create server, Let's Encrypt certificate and DNS recdords.
 ```
+. env.sh
 cd terragrunt
 terragrunt apply-all --terragrunt-non-interactive
 ```
-Timeouts are 7 minutes for the certificate and 30 minutes to connect to the server.
+Timeouts are 7 minutes for the certificate and 30 minutes to connect to the server. \
+Keep in mind Jitsi Meet is **open to public** by default.
 
 ## Deleting the server
-You may want to remove the Jitsi server to reduce costs. The Let's Encrypt certificate should never be destroyed. A good approach is to run destroy-all in the dns module. This will delete the DNS records, the cloud server and the project SSH key but nothing else.
+You may want to remove the Jitsi server to reduce costs. The Let's Encrypt certificate should never be destroyed.
 ```
 . env.sh
 export TG_PREVENT_DESTROY=false
-cd terragrunt/dns
-terragrunt destroy-all
-cd ../jitsi
+cd terragrunt/jitsi
+terragrunt destroy
+cd ../dns
+terragrunt destroy
+cd ../server
 terragrunt destroy
 export TG_PREVENT_DESTROY=true
 ```
