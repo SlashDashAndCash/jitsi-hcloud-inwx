@@ -62,6 +62,9 @@ cd "$PDIR"
 
 [[ -d ./bin ]] || mkdir ./bin
 
+[[ -d ./tf_state ]] || mkdir ./tf_state
+chmod 0700 ./tf_state
+
 download_file "./bin/terraform.zip" $TERRAFORM_URL $TERRAFORM_CHECKSUM
 
 download_file "./bin/terragrunt" $TERRAGRUNT_URL $TERRAGRUNT_CHECKSUM
@@ -74,5 +77,6 @@ chmod +x ./env.sh
 
 if [[ ! -f ./input.hcl ]]; then
   cp ./input.hcl.template ./input.hcl
+  chmod 0600 ./input.hcl
   echo -e "\n\n*** Please fill out input.hcl ***\n\n"
 fi
