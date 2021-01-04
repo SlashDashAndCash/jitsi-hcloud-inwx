@@ -1,0 +1,19 @@
+inputs = {
+  hcloud_token  = ""
+
+  inwx_username = ""
+  inwx_password = ""
+
+  # By default a Let's Encrypt test certificate will be requested.
+  # Uncomment the next line to issue a real certificate.
+  #acme_server = "https://acme-v02.api.letsencrypt.org/directory"
+  email_address = ""
+
+  fqdn = ""
+
+  # Optional settings
+  #ssh_pubkey_file = "~/.ssh/id_rsa.pub"
+  #ssh_key_file = "~/.ssh/id_rsa"
+  #server_type = "cx11"
+  #location = "nbg1"
+}
