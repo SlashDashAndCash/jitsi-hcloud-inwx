@@ -14,6 +14,7 @@ inputs = {
   # Optional settings
   #ssh_pubkey_file = "~/.ssh/id_rsa.pub"
   #ssh_key_file = "~/.ssh/id_rsa"
+  #image = "debian-10"  # Only tested with debian-10
   #server_type = "cx11"
   #location = "nbg1"
 }

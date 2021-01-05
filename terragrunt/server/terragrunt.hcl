@@ -1,5 +1,5 @@
 terraform {
-  source = "git::git@github.com:SlashDashAndCash/tf_module_hcloud_server.git?ref=v0.1.1"
+  source = "git::git@github.com:SlashDashAndCash/tf_module_hcloud_server.git?ref=v0.2.0"
 }
 
 locals {
