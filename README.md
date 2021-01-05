@@ -73,3 +73,12 @@ Moving to another workstation is easy. However the tf_state dir must only exist 
 2. On your new workstation follow the *installation instructions*.
 3. Restore input.hcl and tf_state dir.
 4. Continue with *Bootstrap your server* section.
+
+## Troubleshooting
+If something went wrong, it can help to delete the Terragrunt cache directories.
+
+In the project directory run the following command.
+```
+cd jitsi-hcloud-inwx
+find ./terragrunt -name .terragrunt-cache -type d -exec rm -rf {} \;
+```
