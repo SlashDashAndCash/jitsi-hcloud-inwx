@@ -13,6 +13,7 @@ dependency "server" {
 
   mock_outputs_allowed_terraform_commands = ["validate"]
   mock_outputs = {
+    id           = "1234567"
     ipv4_address = "240.132.93.71"
     ipv6_address = "fd9e:21a7:a92c:2323::1"
   }

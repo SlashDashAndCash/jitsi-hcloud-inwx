@@ -1,11 +1,22 @@
 terraform {
-  source = "git::git@github.com:SlashDashAndCash/tf_module_jitsi.git?ref=v0.1.2"
+  source = "git::git@github.com:SlashDashAndCash/tf_module_jitsi.git?ref=v0.2.0"
 }
 
 locals {
   common_vars = merge(
     read_terragrunt_config(find_in_parent_folders("input.hcl")).inputs
   )
+}
+
+dependency "server" {
+  config_path = "../server"
+
+  mock_outputs_allowed_terraform_commands = ["validate"]
+  mock_outputs = {
+    id           = "1234567"
+    ipv4_address = "240.132.93.71"
+    ipv6_address = "fd9e:21a7:a92c:2323::1"
+  }
 }
 
 dependency "dns" {
@@ -33,7 +44,7 @@ EOT
 }
 
 dependencies {
-  paths = ["../dns", "../cert"]
+  paths = ["../server", "../dns", "../cert"]
 }
 
 include {
@@ -48,7 +59,8 @@ prevent_destroy = get_env("TG_PREVENT_DESTROY", true)
 inputs = merge(
   local.common_vars,
   {
-    fullchain_pem = dependency.cert.outputs.fullchain_pem
+    server_id       = dependency.server.outputs.id
+    fullchain_pem   = dependency.cert.outputs.fullchain_pem
     private_key_pem = dependency.cert.outputs.private_key_pem
   }
 )
