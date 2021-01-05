@@ -77,6 +77,7 @@ chmod +x ./env.sh
 
 if [[ ! -f ./input.hcl ]]; then
   cp ./input.hcl.template ./input.hcl
-  chmod 0600 ./input.hcl
   echo -e "\n\n*** Please fill out input.hcl ***\n\n"
 fi
+chmod 0600 ./input.hcl
+
