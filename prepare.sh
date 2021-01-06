@@ -12,7 +12,6 @@ download_file () {
 
   [[ -f $FILE ]] || curl -q -L -o $FILE $2
 
-
   if [[ $(validate $FILE $3) == false ]]; then
     rm -f $FILE
     echo "WARN: Checksum of $FILE doesn't match. Trying to download again"
@@ -27,9 +26,9 @@ download_file () {
   if [[ $FILE == *".zip" ]]; then
     unzip -q -o $FILE -d $(dirname $FILE)
     FILE=${FILE%".zip"}
+  else
+    chmod +x $FILE
   fi
-
-  chmod +x $FILE
 }
 
 
