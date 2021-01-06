@@ -2,15 +2,26 @@
 
 set -e
 
+validate () {
+  CHECKSUM=$(sha256sum $1)
+  [[ "$CHECKSUM" == "$2"* ]] && echo true || echo false
+}
+
 download_file () {
   FILE=$1
 
   [[ -f $FILE ]] || curl -q -L -o $FILE $2
 
-  CHECKSUM=$(sha256sum $FILE)
-  if [[ "$CHECKSUM" != "$3"* ]]; then
-    echo "ERROR: Checksum of $FILE doesn't match"
-    exit 1
+
+  if [[ $(validate $FILE $3) == false ]]; then
+    rm -f $FILE
+    echo "WARN: Checksum of $FILE doesn't match. Trying to download again"
+    curl -q -L -o $FILE $2
+
+    if [[ $(validate $FILE $3) == false ]]; then
+      echo "ERROR: Checksum of $FILE doesn't match"
+      exit 1
+    fi
   fi
 
   if [[ $FILE == *".zip" ]]; then
@@ -52,7 +63,7 @@ elif [[ "$OSTYPE" == "darwin"* ]] && [[ "$ARCH" == "x86_64" ]]; then
   INWXPROVIDER_URL="https://github.com/andrexus/terraform-provider-inwx/releases/download/$INWXPROVIDER_VERSION/${FLAVOUR}_terraform-provider-inwx"
   INWXPROVIDER_CHECKSUM='b18e342b9bd5792f2eaa226ddc86d62b97fb5b0ba996b5957126f957fb0d2614'
 else
-  echo "ERROR: Platform $FLAVOUR not supported"
+  echo "ERROR: Platform $ARCH - $OSTYPE not supported"
   exit 1
 fi
 
@@ -80,4 +91,3 @@ if [[ ! -f ./input.hcl ]]; then
   echo -e "\n\n*** Please fill out input.hcl ***\n\n"
 fi
 chmod 0600 ./input.hcl
-
