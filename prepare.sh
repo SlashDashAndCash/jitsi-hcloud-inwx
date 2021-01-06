@@ -76,6 +76,8 @@ cd "$PDIR"
 [[ -d ./tf_state ]] || mkdir ./tf_state
 chmod 0700 ./tf_state
 
+rm -rf terragrunt/*/.terragrunt-cache
+
 download_file "./bin/terraform.zip" $TERRAFORM_URL $TERRAFORM_CHECKSUM
 
 download_file "./bin/terragrunt" $TERRAGRUNT_URL $TERRAGRUNT_CHECKSUM
