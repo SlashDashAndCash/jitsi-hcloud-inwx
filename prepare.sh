@@ -14,11 +14,11 @@ download_file () {
 
   if [[ $(validate $FILE $3) == false ]]; then
     rm -f $FILE
-    echo "WARN: Checksum of $FILE doesn't match. Trying to download again"
+    echo "WARN: Checksum of $FILE doesn't match. Trying to download again" 1>&2
     curl -q -L -o $FILE $2
 
     if [[ $(validate $FILE $3) == false ]]; then
-      echo "ERROR: Checksum of $FILE doesn't match"
+      echo "ERROR: Checksum of $FILE doesn't match" 1>&2
       exit 1
     fi
   fi
@@ -62,7 +62,7 @@ elif [[ "$OSTYPE" == "darwin"* ]] && [[ "$ARCH" == "x86_64" ]]; then
   INWXPROVIDER_URL="https://github.com/andrexus/terraform-provider-inwx/releases/download/$INWXPROVIDER_VERSION/${FLAVOUR}_terraform-provider-inwx"
   INWXPROVIDER_CHECKSUM='b18e342b9bd5792f2eaa226ddc86d62b97fb5b0ba996b5957126f957fb0d2614'
 else
-  echo "ERROR: Platform $ARCH - $OSTYPE not supported"
+  echo "ERROR: Platform $ARCH - $OSTYPE not supported" 1>&2
   exit 1
 fi
 
