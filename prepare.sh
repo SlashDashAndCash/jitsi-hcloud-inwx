@@ -3,8 +3,21 @@
 set -e
 
 validate () {
-  CHECKSUM=$(sha256sum $1)
-  [[ "$CHECKSUM" == "$2"* ]] && echo true || echo false
+  ARCH=$(uname -m)
+  if [[ "$OSTYPE" == "linux-gnu"* ]] && [[ "$ARCH" == "x86_64" ]]; then
+    FLAVOUR='linux_amd64'
+    CHECKSUM=$(sha256sum $1)
+    [[ "$CHECKSUM" == "$2"* ]] && echo true || echo false
+  elif [[ "$OSTYPE" == "darwin"* ]] && [[ "$ARCH" == "x86_64" ]]; then
+    CHECKSUM=$(shasum -a 256 $1)
+    [[ "$CHECKSUM" == "$2"* ]] && echo true || echo false
+  elif [[ "$OSTYPE" == "darwin"* ]] && [[ "$ARCH" == "arm64" ]]; then
+    CHECKSUM=$(shasum -a 256 $1)
+    [[ "$CHECKSUM" == "$2"* ]] && echo true || echo false
+else
+  echo "ERROR: Platform $ARCH - $OSTYPE not supported" 1>&2
+  exit 1
+fi
 }
 
 download_file () {
@@ -49,6 +62,20 @@ if [[ "$OSTYPE" == "linux-gnu"* ]] && [[ "$ARCH" == "x86_64" ]]; then
   INWXPROVIDER_CHECKSUM='67e3ea767bf9202a070b83448a351d17d1e27bc59fb1952e9c6706e6ec0bc9b6'
 elif [[ "$OSTYPE" == "darwin"* ]] && [[ "$ARCH" == "x86_64" ]]; then
   FLAVOUR='darwin_amd64'
+
+  TERRAFORM_VERSION='0.14.3'
+  TERRAFORM_URL="https://releases.hashicorp.com/terraform/$TERRAFORM_VERSION/terraform_${TERRAFORM_VERSION}_${FLAVOUR}.zip"
+  TERRAFORM_CHECKSUM='eda23614cd1dce1e96e7adf84f445c2783132c072fbd987f1f8858f34c361e41'
+
+  TERRAGRUNT_VERSION='v0.26.7'
+  TERRAGRUNT_URL="https://github.com/gruntwork-io/terragrunt/releases/download/$TERRAGRUNT_VERSION/terragrunt_${FLAVOUR}"
+  TERRAGRUNT_CHECKSUM='6ab96b0575165d432c213cc8a7678d7384763a7cf16db413bdce3c039bb0af35'
+
+  INWXPROVIDER_VERSION='v0.3.0'
+  INWXPROVIDER_URL="https://github.com/andrexus/terraform-provider-inwx/releases/download/$INWXPROVIDER_VERSION/${FLAVOUR}_terraform-provider-inwx"
+  INWXPROVIDER_CHECKSUM='b18e342b9bd5792f2eaa226ddc86d62b97fb5b0ba996b5957126f957fb0d2614'
+  elif [[ "$OSTYPE" == "darwin"* ]] && [[ "$ARCH" == "arm64" ]]; then
+  FLAVOUR='darwin_arm64'
 
   TERRAFORM_VERSION='0.14.3'
   TERRAFORM_URL="https://releases.hashicorp.com/terraform/$TERRAFORM_VERSION/terraform_${TERRAFORM_VERSION}_${FLAVOUR}.zip"
