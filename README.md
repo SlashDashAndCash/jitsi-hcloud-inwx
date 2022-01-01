@@ -41,7 +41,7 @@ All uncommented variables are mandatory. Paste the newly created API-Token into 
 ```
 . env.sh
 cd terragrunt
-terragrunt apply-all --terragrunt-non-interactive
+terragrunt run-all apply --terragrunt-non-interactive
 ```
 Timeouts are 7 minutes for the certificate and 30 minutes to connect to the server. \
 Keep in mind Jitsi Meet is **open to public** by default.
@@ -52,7 +52,7 @@ A good aproach is to destroy the dns resource with dependencies. This will delet
 ```
 . env.sh
 cd terragrunt/dns
-terragrunt destroy-all
+terragrunt run-all destroy
 ```
 
 To recreate the server, just follow the instructions in *Bootstrap your server*.

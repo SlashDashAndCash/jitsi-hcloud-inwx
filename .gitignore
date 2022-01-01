@@ -2,5 +2,6 @@ bin/
 providers/
 tf_state/
 terragrunt/*/.terragrunt-cache
+terragrunt/*/.terraform.lock.hcl
 input.hcl
 .terraformrc

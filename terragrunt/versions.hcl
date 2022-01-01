@@ -1,2 +1,2 @@
-terraform_version_constraint  = "=0.14.3"
-terragrunt_version_constraint = "=0.26.7"
+terraform_version_constraint  = "=1.1.2"
+terragrunt_version_constraint = "=0.35.16"
