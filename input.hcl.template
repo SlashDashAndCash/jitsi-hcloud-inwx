@@ -7,6 +7,12 @@ inputs = {
   # By default a Let's Encrypt test certificate will be requested.
   # Uncomment the next line to issue a real certificate.
   #acme_server = "https://acme-v02.api.letsencrypt.org/directory"
+
+  # Defaults to system-configured DNS resolvers.
+  # Uncomment this if your DNS servers can't yet resolve the new FQDN.
+  #recursive_nameservers = ["8.8.8.8:53", "8.8.4.4:53"]
+
+  # E-Mail address which will be used for Let's encrypt registration.
   email_address = ""
 
   fqdn = ""
@@ -14,7 +20,7 @@ inputs = {
   # Optional settings
   #ssh_pubkey_file = "~/.ssh/id_rsa.pub"
   #ssh_key_file = "~/.ssh/id_rsa"
-  #image = "debian-10"  # Only tested with debian-10
+  #image = "debian-11"  # Tested on debian-10 and 11
   #server_type = "cx11"
   #location = "nbg1"
 }

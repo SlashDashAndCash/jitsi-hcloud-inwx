@@ -1,5 +1,5 @@
 terraform {
-  source = "git::git@github.com:SlashDashAndCash/tf_module_acme.git?ref=v0.1.1"
+  source = "git::git@github.com:SlashDashAndCash/tf_module_acme.git?ref=v0.2.1"
 }
 
 locals {

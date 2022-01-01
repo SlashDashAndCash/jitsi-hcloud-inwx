@@ -57,9 +57,6 @@ if [[ "$OSTYPE" == "linux-gnu"* ]] && [[ "$ARCH" == "x86_64" ]]; then
   TERRAGRUNT_URL="https://github.com/gruntwork-io/terragrunt/releases/download/$TERRAGRUNT_VERSION/terragrunt_${FLAVOUR}"
   TERRAGRUNT_CHECKSUM='ac9df2de05d8fd14e3f8deb91899814461ac89f9cecb6a1fb44c8e74e1c6bf06'
 
-  INWXPROVIDER_VERSION='v0.3.0'
-  INWXPROVIDER_URL="https://github.com/andrexus/terraform-provider-inwx/releases/download/$INWXPROVIDER_VERSION/${FLAVOUR}_terraform-provider-inwx"
-  INWXPROVIDER_CHECKSUM='67e3ea767bf9202a070b83448a351d17d1e27bc59fb1952e9c6706e6ec0bc9b6'
 elif [[ "$OSTYPE" == "darwin"* ]] && [[ "$ARCH" == "x86_64" ]]; then
   FLAVOUR='darwin_amd64'
 
@@ -71,9 +68,6 @@ elif [[ "$OSTYPE" == "darwin"* ]] && [[ "$ARCH" == "x86_64" ]]; then
   TERRAGRUNT_URL="https://github.com/gruntwork-io/terragrunt/releases/download/$TERRAGRUNT_VERSION/terragrunt_${FLAVOUR}"
   TERRAGRUNT_CHECKSUM='6ab96b0575165d432c213cc8a7678d7384763a7cf16db413bdce3c039bb0af35'
 
-  INWXPROVIDER_VERSION='v0.3.0'
-  INWXPROVIDER_URL="https://github.com/andrexus/terraform-provider-inwx/releases/download/$INWXPROVIDER_VERSION/${FLAVOUR}_terraform-provider-inwx"
-  INWXPROVIDER_CHECKSUM='b18e342b9bd5792f2eaa226ddc86d62b97fb5b0ba996b5957126f957fb0d2614'
   elif [[ "$OSTYPE" == "darwin"* ]] && [[ "$ARCH" == "arm64" ]]; then
   FLAVOUR='darwin_arm64'
 
@@ -85,9 +79,6 @@ elif [[ "$OSTYPE" == "darwin"* ]] && [[ "$ARCH" == "x86_64" ]]; then
   TERRAGRUNT_URL="https://github.com/gruntwork-io/terragrunt/releases/download/$TERRAGRUNT_VERSION/terragrunt_${FLAVOUR}"
   TERRAGRUNT_CHECKSUM='6ab96b0575165d432c213cc8a7678d7384763a7cf16db413bdce3c039bb0af35'
 
-  INWXPROVIDER_VERSION='v0.3.0'
-  INWXPROVIDER_URL="https://github.com/andrexus/terraform-provider-inwx/releases/download/$INWXPROVIDER_VERSION/${FLAVOUR}_terraform-provider-inwx"
-  INWXPROVIDER_CHECKSUM='b18e342b9bd5792f2eaa226ddc86d62b97fb5b0ba996b5957126f957fb0d2614'
 else
   echo "ERROR: Platform $ARCH - $OSTYPE not supported" 1>&2
   exit 1
@@ -107,10 +98,6 @@ rm -rf terragrunt/*/.terragrunt-cache
 download_file "./bin/terraform.zip" $TERRAFORM_URL $TERRAFORM_CHECKSUM
 
 download_file "./bin/terragrunt" $TERRAGRUNT_URL $TERRAGRUNT_CHECKSUM
-
-INWXPROVIDER_BIN=./providers/terraform.local/inwx/inwx/${INWXPROVIDER_VERSION#v}/$FLAVOUR/terraform-provider-inwx
-[[ -d $(dirname $INWXPROVIDER_BIN) ]] || mkdir -p $(dirname $INWXPROVIDER_BIN)
-download_file $INWXPROVIDER_BIN $INWXPROVIDER_URL $INWXPROVIDER_CHECKSUM
 
 chmod +x ./env.sh
 
