@@ -7,6 +7,3 @@ if [[ "$PATH" != "$PWD"* ]]; then
   export PATH=$PWD/bin:$PATH
 fi
 
-sed "s|PROVIDER_DIR|$PWD/providers|g" ./.terraformrc.template > ./.terraformrc
-
-export TF_CLI_CONFIG_FILE=$PWD/.terraformrc

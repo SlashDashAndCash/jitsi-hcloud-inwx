@@ -1,9 +1,0 @@
-provider_installation {
-  filesystem_mirror {
-    path    = "PROVIDER_DIR"
-    include = ["terraform.local/*/*"]
-  }
-  direct {
-    exclude = ["terraform.local/*/*"]
-  }
-}
