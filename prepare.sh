@@ -49,35 +49,35 @@ ARCH=$(uname -m)
 if [[ "$OSTYPE" == "linux-gnu"* ]] && [[ "$ARCH" == "x86_64" ]]; then
   FLAVOUR='linux_amd64'
 
-  TERRAFORM_VERSION='1.1.2'
+  TERRAFORM_VERSION='1.6.5'
   TERRAFORM_URL="https://releases.hashicorp.com/terraform/$TERRAFORM_VERSION/terraform_${TERRAFORM_VERSION}_${FLAVOUR}.zip"
-  TERRAFORM_CHECKSUM='734efa82e2d0d3df8f239ce17f7370dabd38e535d21e64d35c73e45f35dfa95c'
+  TERRAFORM_CHECKSUM='f6404dc264aff75fc1b776670c1abf732cfed3d4a1ce49b64bc5b5d116fe87d5'
 
-  TERRAGRUNT_VERSION='v0.35.16'
+  TERRAGRUNT_VERSION='v0.54.1'
   TERRAGRUNT_URL="https://github.com/gruntwork-io/terragrunt/releases/download/$TERRAGRUNT_VERSION/terragrunt_${FLAVOUR}"
-  TERRAGRUNT_CHECKSUM='0404f0dfd2ab3b642dcf2c1c038d0bcbee256ee14a92d731a9ea0514f6cf47f4'
+  TERRAGRUNT_CHECKSUM='a7b6821ec91b6b6f5c6535e07ced1f503ff6bb588f418a1527cdddfc3272f118'
 
 elif [[ "$OSTYPE" == "darwin"* ]] && [[ "$ARCH" == "x86_64" ]]; then
   FLAVOUR='darwin_amd64'
 
-  TERRAFORM_VERSION='1.1.2'
+  TERRAFORM_VERSION='1.6.5'
   TERRAFORM_URL="https://releases.hashicorp.com/terraform/$TERRAFORM_VERSION/terraform_${TERRAFORM_VERSION}_${FLAVOUR}.zip"
-  TERRAFORM_CHECKSUM='214da2e97f95389ba7557b8fcb11fe05a23d877e0fd67cd97fcbc160560078f1'
+  TERRAFORM_CHECKSUM='6595f56181b073d564a5f94510d4a40dab39cc6543e6a2c9825f785a48ddaf51'
 
-  TERRAGRUNT_VERSION='v0.35.16'
+  TERRAGRUNT_VERSION='v0.54.1'
   TERRAGRUNT_URL="https://github.com/gruntwork-io/terragrunt/releases/download/$TERRAGRUNT_VERSION/terragrunt_${FLAVOUR}"
-  TERRAGRUNT_CHECKSUM='838fbc06abd04861224a676077cf24eb6505ed2fbb89d23e25b93d30aad6a2fc'
+  TERRAGRUNT_CHECKSUM='4c3461aca5e0fecdc9664193a9a2a9df030fdb089cd500e132ae3c0ece38515a'
 
   elif [[ "$OSTYPE" == "darwin"* ]] && [[ "$ARCH" == "arm64" ]]; then
   FLAVOUR='darwin_arm64'
 
-  TERRAFORM_VERSION='1.1.2'
+  TERRAFORM_VERSION='1.6.5'
   TERRAFORM_URL="https://releases.hashicorp.com/terraform/$TERRAFORM_VERSION/terraform_${TERRAFORM_VERSION}_${FLAVOUR}.zip"
-  TERRAFORM_CHECKSUM='39e28f49a753c99b5e2cb30ac8146fb6b48da319c9db9d152b1e8a05ec9d4a13'
+  TERRAFORM_CHECKSUM='5c66fdc6adb6e7aa383b0979b1228c7c7b8d0b7d60989a13993ee8043b756883'
 
-  TERRAGRUNT_VERSION='v0.35.16'
+  TERRAGRUNT_VERSION='v0.54.1'
   TERRAGRUNT_URL="https://github.com/gruntwork-io/terragrunt/releases/download/$TERRAGRUNT_VERSION/terragrunt_${FLAVOUR}"
-  TERRAGRUNT_CHECKSUM='085a101da0d312960f74901c270b7e05ccf0f5b58ad58aa416a74ea9a5aa42a0'
+  TERRAGRUNT_CHECKSUM='06f481b401a45340310c8d4fe4e0625ed5f69373075ed6cc9f2e1c36671f0417'
 
 else
   echo "ERROR: Platform $ARCH - $OSTYPE not supported" 1>&2

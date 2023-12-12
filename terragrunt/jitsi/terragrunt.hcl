@@ -1,5 +1,5 @@
 terraform {
-  source = "git::git@github.com:SlashDashAndCash/tf_module_jitsi.git?ref=v0.3.0"
+  source = "git::git@github.com:SlashDashAndCash/tf_module_jitsi.git?ref=v0.4.0"
 }
 
 locals {

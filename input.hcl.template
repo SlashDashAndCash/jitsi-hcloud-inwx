@@ -20,7 +20,23 @@ inputs = {
   # Optional settings
   #ssh_pubkey_file = "~/.ssh/id_rsa.pub"
   #ssh_key_file = "~/.ssh/id_rsa"
-  #image = "debian-11"  # Tested on debian-10 and 11
-  #server_type = "cx11"
-  #location = "nbg1"
+
+  ## Server image (Tested on debian-11 and 12)
+  #image = "debian-12"  # Bookworm (default)
+  #image = "debian-11"  # Bullseye
+
+  ## Server type
+  # cx11,  cx21,  cx31,  cx41,  cx51
+  # cpx11, cpx21, cpx31, cpx41, cpx51
+  # cax11, cax21, cax31, cax41
+  # Dedicated CPU:
+  # ccx13, ccx23, ccx33, ccx43, ccx53, ccx63
+  #server_type = "cx11"  # default
+
+  ## Location
+  #location = "nbg1"  # Nuremberg DC Park 1, eu-central (default)
+  #location = "fsn1"  # Falkenstein DC Park 1, eu-central
+  #location = "hel1"  # Helsinki DC Park 1, eu-central
+  #location = "ash"   # Ashburn, VA, us-east
+  #location = "hil"   # Hillsboro, OR, us-west
 }
